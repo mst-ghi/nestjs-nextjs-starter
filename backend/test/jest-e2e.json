@@ -1,0 +1,29 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@app/configs/(.*)": "<rootDir>/../libs/configs/src/$1",
+    "@app/configs": "<rootDir>/../libs/configs/src",
+    "@app/shared/(.*)": "<rootDir>/../libs/shared/src/$1",
+    "@app/shared": "<rootDir>/../libs/shared/src",
+    "@app/middlewares/(.*)": "<rootDir>/../libs/middlewares/src/$1",
+    "@app/middlewares": "<rootDir>/../libs/middlewares/src",
+    "@app/enums/(.*)": "<rootDir>/../libs/enums/src/$1",
+    "@app/enums": "<rootDir>/../libs/enums/src",
+    "@app/prisma/(.*)": "<rootDir>/../libs/prisma/src/$1",
+    "@app/prisma": "<rootDir>/../libs/prisma/src",
+    "@app/guards/(.*)": "<rootDir>/../libs/guards/src/$1",
+    "@app/guards": "<rootDir>/../libs/guards/src",
+    "@app/decorators/(.*)": "<rootDir>/../libs/decorators/src/$1",
+    "@app/decorators": "<rootDir>/../libs/decorators/src"
+  }
+}

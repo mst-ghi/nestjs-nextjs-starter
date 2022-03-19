@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "typeRoots": ["./types/**.d.ts"],
+    "paths": {
+      "@app/configs": ["libs/configs/src"],
+      "@app/configs/*": ["libs/configs/src/*"],
+      "@app/shared": ["libs/shared/src"],
+      "@app/shared/*": ["libs/shared/src/*"],
+      "@app/middleware": ["libs/middleware/src"],
+      "@app/middleware/*": ["libs/middleware/src/*"],
+      "@app/enums": ["libs/enums/src"],
+      "@app/enums/*": ["libs/enums/src/*"],
+      "@app/prisma": ["libs/prisma/src"],
+      "@app/prisma/*": ["libs/prisma/src/*"],
+      "@app/guards": ["libs/guards/src"],
+      "@app/guards/*": ["libs/guards/src/*"],
+      "@app/decorators": ["libs/decorators/src"],
+      "@app/decorators/*": ["libs/decorators/src/*"]
+    }
+  }
+}

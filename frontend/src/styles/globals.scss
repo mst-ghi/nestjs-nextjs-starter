@@ -1,0 +1,30 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  background: #f6f8fa;
+}
+
+input,
+optgroup,
+select,
+textarea {
+  padding: 8px;
+}
+
+.btn {
+  text-transform: none;
+  min-height: 2rem;
+}
+
+.react-select input {
+  height: 32px;
+}
+
+.reactEasyCrop_Container {
+  border-radius: 0.5rem;
+  position: relative !important;
+  width: 100%;
+  height: 360px;
+}

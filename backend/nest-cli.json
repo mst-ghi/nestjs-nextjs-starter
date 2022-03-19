@@ -1,0 +1,72 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "projects": {
+    "configs": {
+      "type": "library",
+      "root": "libs/configs",
+      "entryFile": "index",
+      "sourceRoot": "libs/configs/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/configs/tsconfig.lib.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
+    },
+    "middlewares": {
+      "type": "library",
+      "root": "libs/middlewares",
+      "entryFile": "index",
+      "sourceRoot": "libs/middlewares/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/middlewares/tsconfig.lib.json"
+      }
+    },
+    "enums": {
+      "type": "library",
+      "root": "libs/enums",
+      "entryFile": "index",
+      "sourceRoot": "libs/enums/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/enums/tsconfig.lib.json"
+      }
+    },
+    "prisma": {
+      "type": "library",
+      "root": "libs/prisma",
+      "entryFile": "index",
+      "sourceRoot": "libs/prisma/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/prisma/tsconfig.lib.json"
+      }
+    },
+    "guards": {
+      "type": "library",
+      "root": "libs/guards",
+      "entryFile": "index",
+      "sourceRoot": "libs/guards/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/guards/tsconfig.lib.json"
+      }
+    },
+    "decorators": {
+      "type": "library",
+      "root": "libs/decorators",
+      "entryFile": "index",
+      "sourceRoot": "libs/decorators/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/decorators/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": false
+  }
+}

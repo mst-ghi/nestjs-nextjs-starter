@@ -1,0 +1,30 @@
+{
+  "printWidth": 100,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "bracketSameLine": false,
+  "singleQuote": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^react$",
+    "^react(.*)$",
+    "^next(.*)$",
+    "^@utils/(.*)$",
+    "^@hooks/(.*)$",
+    "^@store/(.*)$",
+
+    "^@components/templates/(.*)$",
+    "^@components/organisms/(.*)$",
+    "^@components/molecules/(.*)$",
+    "^@components/atoms/(.*)$",
+    "^@components/(.*)$",
+
+    "^@styles/(.*)$",
+
+    "^[./]",
+    "^[../]"
+  ],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true
+}

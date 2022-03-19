@@ -1,0 +1,6 @@
+node_modules
+src/utils/types
+public/jitsimeet.min.js
+.next
+.eslintrc.js
+*.config.js

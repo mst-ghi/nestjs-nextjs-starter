@@ -1,0 +1,205 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique @db.VarChar(150)
+  title       String   @db.VarChar(100)
+  department  String   @db.VarChar(100)
+  description String   @db.VarChar(255)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  users User[]
+
+  @@map("roles")
+}
+
+model Language {
+  id         Int      @id @default(autoincrement())
+  key        String   @unique @db.VarChar(255)
+  title      String   @db.VarChar(150)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("languages")
+}
+
+model Tag {
+  id         Int      @id @default(autoincrement())
+  key        String   @unique @db.VarChar(255)
+  title      String   @db.VarChar(150)
+  is_active  Boolean  @default(false)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("tags")
+}
+
+model Country {
+  id              Int     @id @default(autoincrement())
+  iso2            String  @unique @db.VarChar(5)
+  iso3            String  @unique @db.VarChar(5)
+  name            String  @db.VarChar(150)
+  numeric_code    String? @db.VarChar(50)
+  phone_code      String? @db.VarChar(30)
+  capital         String? @db.VarChar(150)
+  currency        String? @db.VarChar(255)
+  currency_name   String? @db.VarChar(255)
+  currency_symbol String? @db.VarChar(255)
+  tld             String? @db.VarChar(255)
+  native          String? @db.VarChar(255)
+  region          String? @db.VarChar(255)
+  subregion       String? @db.VarChar(255)
+  timezones       Json?   @db.Json()
+  translations    Json?   @db.Json()
+  latitude        Float?  @db.DoublePrecision
+  longitude       Float?  @db.DoublePrecision
+  emoji           String? @db.VarChar(255)
+  emojiU          String? @db.VarChar(255)
+  wiki_data_id    String? @db.VarChar(255)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+ 
+  provinces Province[]
+  cities    City[]
+  profiles  Profile[]
+
+  @@map("countries")
+}
+
+model Province {
+  id         Int      @id @default(autoincrement())
+  country_id Int      @unique
+  country    Country  @relation(fields: [country_id], references: [id])
+  name       String   @db.VarChar(255)
+  code       String   @unique @db.VarChar(30)
+  latitude   Float?   @db.DoublePrecision
+  longitude  Float?   @db.DoublePrecision
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  cities   City[]
+  profiles Profile[]
+
+  @@map("provinces")
+}
+
+model City {
+  id          Int      @id @default(autoincrement())
+  country_id  Int      @unique
+  country     Country  @relation(fields: [country_id], references: [id])
+  province_id Int      @unique
+  province    Province @relation(fields: [province_id], references: [id])
+  name        String   @db.VarChar(255)
+  latitude    Float?   @db.DoublePrecision
+  longitude   Float?   @db.DoublePrecision
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("cities")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  full_name    String   @db.VarChar(250)
+  username     String   @unique @db.VarChar(50)
+  email        String   @unique @db.VarChar(150)
+  phone_number String?  @db.VarChar(30)
+  password     String?  @db.VarChar(255)
+  status       Int      @default(0) @db.SmallInt
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  roles         Role[]
+  refreshTokens RefreshToken[]
+  profile       Profile?
+  medias        Media[]
+  socials       Social[]
+
+  @@map("users")
+}
+
+model Profile {
+  id           Int      @id @default(autoincrement())
+  user_id      Int      @unique
+  user         User     @relation(fields: [user_id], references: [id])
+  avatar_id    Int?     @unique
+  avatar       Media?   @relation(fields: [avatar_id], references: [id])
+  country_id   Int      @unique
+  country      Country  @relation(fields: [country_id], references: [id])
+  province_id  Int      @unique
+  province     Province @relation(fields: [province_id], references: [id])
+  city         String?  @db.VarChar(200)
+  title        String   @db.VarChar(400)
+  spoken_langs String[] @db.VarChar(150)
+  tags         String[] @db.VarChar(150)
+  about        String?  @db.Text()
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+model Social {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  user       User     @relation(fields: [user_id], references: [id])
+  type       String   @db.VarChar(100)
+  username   String   @db.VarChar(250)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("socials")
+}
+
+model Media {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  user       User     @relation(fields: [user_id], references: [id])
+  storage    String   @db.VarChar(50)
+  name       String   @db.VarChar(150)
+  type       String   @db.VarChar(50)
+  url        String   @db.VarChar(300)
+  path       String   @db.VarChar(300)
+  file_size  String   @db.VarChar(50)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  profile Profile?
+
+  @@map("medias")
+}
+
+model RefreshToken {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  user       User     @relation(fields: [user_id], references: [id])
+  client_id  String   @unique @db.VarChar(100)
+  token      String   @db.VarChar(400)
+  expires_at DateTime @db.Timestamp
+
+  @@map("refresh_tokens")
+}
+
+model Setting {
+  id            Int      @id @default(autoincrement())
+  key           String   @unique @db.VarChar(200)
+  title         String   @db.VarChar(50)
+  type          String   @db.VarChar(100)
+  value         String
+  default_value String
+  desc          String
+  sort          Int      @db.SmallInt
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  @@map("settings")
+}

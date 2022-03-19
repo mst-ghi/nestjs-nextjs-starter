@@ -1,0 +1,66 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "types": [
+      "jest",
+      "node",
+      "@types/jest"
+    ],
+    "typeRoots": [
+      "src/types"
+    ],
+    "paths": {
+      "@svg*": [
+        "public/svg*"
+      ],
+      "@styles*": [
+        "src/styles*"
+      ],
+      "@types*": [
+        "src/types*"
+      ],
+      "@store*": [
+        "src/store*"
+      ],
+      "@utils*": [
+        "src/utils*"
+      ],
+      "@hooks*": [
+        "src/hooks*"
+      ],
+      "@libs*": [
+        "src/libs*"
+      ],
+      "@components*": [
+        "src/components*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "jest.config.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
