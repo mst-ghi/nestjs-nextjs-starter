@@ -8,7 +8,7 @@ import {
   mutateIsShowSettingDialog,
   mutateTheme,
   mutateVersion,
-} from '@store/slices';
+} from '@store/slices/AppSlice';
 
 const useApp = () => {
   const dispatch = useDispatch();

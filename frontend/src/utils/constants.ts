@@ -6,7 +6,8 @@ export const envs = {
   isDevMode: process.env.NODE_ENV === 'development' || false,
   siteTitle: process.env.NEXT_PUBLIC_SITE_TITLE || 'ATS System',
   apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3000',
-  recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+  recaptchaSiteKey:
+    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || `6Le_uJUeAAAAAKU72S33MnBo1xPJsoXYydL1kwXX`,
 };
 
 export const breakPoints = {

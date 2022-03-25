@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
+    "test": "jest --silent",
     "test:clear": "jest --clearCache",
     "new:page": "hygen new page",
     "new:hook": "hygen new hook",

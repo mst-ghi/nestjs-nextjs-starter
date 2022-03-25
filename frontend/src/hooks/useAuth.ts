@@ -11,7 +11,7 @@ import {
   authSetUser,
 } from '@utils/auth';
 import { PostRequest } from '@utils/axios';
-import { authSelector, mutateAuthReset, mutateTokens, mutateUser } from '@store/slices';
+import { authSelector, mutateAuthReset, mutateTokens, mutateUser } from '@store/slices/AuthSlice';
 import useAlert from './useAlert';
 import useApp from './useApp';
 
