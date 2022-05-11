@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import dynamic from 'next/dynamic';
 import { toFirstLetters } from '@utils/string';
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,7 +14,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   wrapperClass?: string | undefined;
 }
 
-const AvatarComponent = memo<AvatarProps>(
+const Avatar = memo<AvatarProps>(
   ({
     src,
     alt,
@@ -51,13 +50,20 @@ const AvatarComponent = memo<AvatarProps>(
             className,
           ]
             .join(' ')
-            .replace(/\s+/g, ' ')}
+            .replace(/\s+/g, ' ')
+            .trim()}
           {...props}
         >
-          {src && <img data-testid={`test-avatar-img-${placeholder}`} src={src} alt={alt} />}
+          {src && (
+            <img
+              data-testid={`test-avatar-img-${placeholder}`}
+              src={src}
+              alt={alt || placeholder}
+            />
+          )}
           {placeholder && !src && (
             <span data-testid={`test-avatar-ph-${placeholder}`} className={letterClass}>
-              {toFirstLetters(placeholder)}
+              {toFirstLetters(placeholder).toUpperCase()}
             </span>
           )}
         </div>
@@ -65,9 +71,5 @@ const AvatarComponent = memo<AvatarProps>(
     );
   }
 );
-
-const Avatar = dynamic(() => Promise.resolve(AvatarComponent), {
-  ssr: false,
-});
 
 export default Avatar;

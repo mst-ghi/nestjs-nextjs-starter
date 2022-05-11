@@ -28,7 +28,7 @@ export const CardBody = React.memo<CardBodyProps>(({ children, className, ...pro
 
 const CardComponent = React.memo<CardProps>(({ className, children }) => {
   return (
-    <div className={['card bg-base-100 shadow-lg rounded-2xl w-full', className].join(' ')}>
+    <div className={['card bg-base-100 p-4 rounded-lg w-full', className].join(' ')}>
       {children}
     </div>
   );

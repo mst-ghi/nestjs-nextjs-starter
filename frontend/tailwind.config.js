@@ -32,6 +32,7 @@ module.exports = {
 
     fontFamily: {
       sans: [
+        'Vazir',
         'Sora',
         'Roboto',
         'ui-sans-serif',
@@ -56,6 +57,7 @@ module.exports = {
 
   variants: {
     extend: {},
+    space: ['responsive', 'direction'],
   },
 
   daisyui: {
@@ -64,7 +66,7 @@ module.exports = {
     base: true,
     utils: true,
     logs: false,
-    rtl: false,
+    rtl: true,
     darkTheme: 'dark',
   },
 };

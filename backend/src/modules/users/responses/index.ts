@@ -6,12 +6,7 @@ export class UserProfileResponse {
   user: UserEntity;
 }
 
-export class MembersListResponse {
+export class PeoplesListResponse {
   @ApiProperty({ type: [UserEntity] })
-  members: UserEntity[];
-}
-
-export class MentorsListResponse {
-  @ApiProperty({ type: [UserEntity] })
-  mentors: UserEntity[];
+  peoples: UserEntity[];
 }

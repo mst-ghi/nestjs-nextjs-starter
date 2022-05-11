@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import dynamic from 'next/dynamic';
 import { toTitleCase } from '@utils/string';
 import useApp from '@hooks/useApp';
 import useDeviceDetect from '@hooks/useDeviceDetect';
@@ -12,10 +11,18 @@ interface SettingsDialogProps {
   className?: string;
 }
 
-const SettingsDialogComponent = memo<SettingsDialogProps>(({ className }) => {
+const SettingsDialog = memo<SettingsDialogProps>(({ className }) => {
   const { isTabletOrMobile } = useDeviceDetect();
-  const { isShowSettingDialog, setIsShowSettingDialog, themes, theme, setTheme, version } =
-    useApp();
+  const {
+    isShowSettingDialog,
+    setIsShowSettingDialog,
+    themes,
+    theme,
+    setTheme,
+    version,
+    direction,
+    setDirection,
+  } = useApp();
 
   const renderThemesButton = () => {
     return themes.map((el, index) => {
@@ -33,11 +40,27 @@ const SettingsDialogComponent = memo<SettingsDialogProps>(({ className }) => {
     });
   };
 
+  const renderDirection = () => {
+    return ['ltr', 'rtl'].map((el, index) => {
+      return (
+        <Button
+          key={`${el}-${index}`}
+          size="xs"
+          className="w-28 m-1"
+          color={direction === el ? 'primary' : 'info'}
+          onClick={() => setDirection(el as 'ltr' | 'rtl')}
+        >
+          {toTitleCase(el)}
+        </Button>
+      );
+    });
+  };
+
   return (
     <Dialog
-      open={isShowSettingDialog}
+      open={isShowSettingDialog || false}
       width={isTabletOrMobile ? 390 : 840}
-      wrapperClass="border-2 border-gray-200"
+      wrapperClass="border-[1px] border-gray-200"
       onClose={() => {
         setIsShowSettingDialog(false);
       }}
@@ -58,11 +81,21 @@ const SettingsDialogComponent = memo<SettingsDialogProps>(({ className }) => {
         >
           {renderThemesButton()}
         </div>
+
+        <div className="divider">
+          <span>Direction</span>
+        </div>
+        <div
+          className={[
+            'flex flex-wrap justify-center items-stretch overflow-auto mt-4',
+            className,
+          ].join(' ')}
+        >
+          {renderDirection()}
+        </div>
       </div>
     </Dialog>
   );
 });
-
-const SettingsDialog = dynamic(() => Promise.resolve(SettingsDialogComponent));
 
 export default SettingsDialog;

@@ -1,13 +1,10 @@
 import { ApiSignature } from '@app/decorators';
 import { Controller, Param, Query } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { UsersService } from './users.service';
-import {
-  MembersListResponse,
-  MentorsListResponse,
-  UserProfileResponse,
-} from './responses';
+import { PeoplesListResponse, UserProfileResponse } from './responses';
+import { RoleKeysEnum } from '@app/enums';
 
 @ApiTags('users')
 @Controller('users')
@@ -28,35 +25,21 @@ export class UsersController {
     };
   }
 
-  @ApiResponse({ status: 200, type: MembersListResponse })
+  @ApiResponse({ status: 200, type: PeoplesListResponse })
+  @ApiQuery({ name: 'role', description: 'filter by role', enum: RoleKeysEnum })
   @ApiSignature({
     method: 'GET',
-    path: '/members',
-    summary: 'get members list',
+    path: '/peoples',
+    summary: 'get peoples list',
     isPagination: true,
   })
-  async members(
+  async peoples(
     @Query('take') take = 20,
     @Query('cursor') cursor: number = undefined,
-  ): Promise<MembersListResponse> {
+    @Query('role') role: string = undefined,
+  ): Promise<PeoplesListResponse> {
     return {
-      members: await this.service.getMembers(take, cursor),
-    };
-  }
-
-  @ApiResponse({ status: 200, type: MentorsListResponse })
-  @ApiSignature({
-    method: 'GET',
-    path: '/mentors',
-    summary: 'get mentors list',
-    isPagination: true,
-  })
-  async mentors(
-    @Query('take') take = 20,
-    @Query('cursor') cursor: number = undefined,
-  ): Promise<MentorsListResponse> {
-    return {
-      mentors: await this.service.getMentors(take, cursor),
+      peoples: await this.service.getPeoples(take, cursor, role),
     };
   }
 }

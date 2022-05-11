@@ -9,7 +9,10 @@ import Button from '@components/atoms/button';
 import Dropdown from '@components/atoms/dropdown';
 import Icon from '@components/atoms/icon';
 
-const links = [{ to: '/', title: 'Home' }];
+const links = [
+  { to: '/', title: 'Home' },
+  { to: '/peoples', title: 'Peoples' },
+];
 
 const BaseHeaderComponent = () => {
   const { getConfirm } = useAlert();
@@ -55,7 +58,7 @@ const BaseHeaderComponent = () => {
               </Button>
             )}
 
-            {user.id && (
+            {user && user.id && (
               <Dropdown
                 end
                 width="w-48"
