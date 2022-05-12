@@ -39,7 +39,7 @@ const SignIn = () => {
             <h1 className="text-gray-600 font-medium text-2xl">Sign in</h1>
           </CardHeader>
 
-          <div className="flex flex-row justify-center space-x-2 px-1 pb-2 pt-4">
+          <div className="flex flex-row justify-center space-x-2 rtl:space-x-reverse px-1 pb-2 pt-4">
             <Button
               className="w-1/2 h-10"
               color="error"

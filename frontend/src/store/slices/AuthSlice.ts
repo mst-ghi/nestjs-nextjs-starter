@@ -1,20 +1,22 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface AuthStateProps {
-  isLoggedIn: boolean;
+export interface AuthStateProps {
+  isLoggedIn?: boolean;
   isMentor?: boolean | undefined;
   isMember?: boolean | undefined;
   isAdmin?: boolean | undefined;
   isSuperAdmin?: boolean | undefined;
-  user: Partial<IUser>;
+  user?: Partial<IUser>;
   accessToken?: string;
   refreshToken?: string;
 }
 
-const initialState = {
+export const initialState = {
   isLoggedIn: false,
   user: {},
 } as AuthStateProps;
+
+export type TokensType = { accessToken?: string; refreshToken?: string };
 
 const authSlice = createSlice({
   name: 'auth',
@@ -41,7 +43,7 @@ const authSlice = createSlice({
         }
       }
     },
-    mutateTokens(state, action: PayloadAction<{ accessToken: string; refreshToken?: string }>) {
+    mutateTokens(state, action: PayloadAction<TokensType>) {
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
     },

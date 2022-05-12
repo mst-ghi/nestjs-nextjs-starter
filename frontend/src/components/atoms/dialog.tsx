@@ -1,6 +1,5 @@
 import { Dialog as HDialog, Transition } from '@headlessui/react';
 import { Fragment, memo } from 'react';
-import dynamic from 'next/dynamic';
 import Button from './button';
 
 interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -12,7 +11,7 @@ interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 }
 
-const DialogComponent = memo<DialogProps>(
+const Dialog = memo<DialogProps>(
   ({
     open,
     title,
@@ -47,7 +46,7 @@ const DialogComponent = memo<DialogProps>(
               glass
               icon={{ name: 'close', size: 16, color: 'gray' }}
               size="xs"
-              className="h-6 w-6 absolute -right-2 -top-2 border-gray-300"
+              className="h-6 w-8 absolute -right-2 -top-2 border-gray-300"
               onClick={onCloseDialog}
             />
           </div>
@@ -59,9 +58,5 @@ const DialogComponent = memo<DialogProps>(
     );
   }
 );
-
-const Dialog = dynamic(() => Promise.resolve(DialogComponent), {
-  ssr: false,
-});
 
 export default Dialog;

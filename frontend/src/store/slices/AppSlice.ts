@@ -2,15 +2,15 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { envs } from '@utils/constants';
 import { ThemeNamesType } from '@utils/theme';
 
-interface AppStateProps {
-  version: string;
-  direction: 'rtl' | 'ltr';
-  theme: ThemeNamesType;
-  isShowSettingDialog: boolean;
-  isGlobalLoading: boolean;
+export interface AppStateProps {
+  version?: string;
+  direction?: 'rtl' | 'ltr';
+  theme?: ThemeNamesType;
+  isShowSettingDialog?: boolean;
+  isGlobalLoading?: boolean;
 }
 
-const initialState = {
+export const initialState = {
   version: envs.version,
   direction: envs.direction,
   theme: 'light',

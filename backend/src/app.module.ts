@@ -19,7 +19,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { MediaModule } from './modules/media/media.module';
 import { SettingsModule } from './modules/settings/settings.module';
 import { CommonModule } from './modules/common/common.module';
-import { CacheManagerService } from '@app/shared/cache/cache-manager.service';
 import { CacheManagerModule } from '@app/shared/cache';
 import { ProfileModule } from './modules/profile/profile.module';
 import { UsersModule } from './modules/users/users.module';

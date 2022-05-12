@@ -94,9 +94,9 @@ model Province {
 
 model City {
   id          Int      @id @default(autoincrement())
-  country_id  Int      @unique
+  country_id  Int      
   country     Country  @relation(fields: [country_id], references: [id])
-  province_id Int      @unique
+  province_id Int      
   province    Province @relation(fields: [province_id], references: [id])
   name        String   @db.VarChar(255)
   latitude    Float?   @db.DoublePrecision
@@ -133,9 +133,9 @@ model Profile {
   user         User     @relation(fields: [user_id], references: [id])
   avatar_id    Int?     @unique
   avatar       Media?   @relation(fields: [avatar_id], references: [id])
-  country_id   Int      @unique
+  country_id   Int      
   country      Country  @relation(fields: [country_id], references: [id])
-  province_id  Int      @unique
+  province_id  Int      
   province     Province @relation(fields: [province_id], references: [id])
   city         String?  @db.VarChar(200)
   title        String   @db.VarChar(400)

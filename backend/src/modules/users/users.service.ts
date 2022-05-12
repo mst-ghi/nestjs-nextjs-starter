@@ -1,12 +1,10 @@
-import { RoleKeysEnum } from '@app/enums';
 import { PrismaService } from '@app/prisma';
 import { UserEntity } from '@app/prisma/entities';
 import { BaseService } from '@app/shared';
 import { throwNotFound } from '@app/shared/errors';
 import {
   UserProfileIncludeQuery,
-  MembersListIncludeQuery,
-  MentorsListIncludeQuery,
+  PeoplesListIncludeQuery,
 } from '@app/shared/queries';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -30,47 +28,40 @@ export class UsersService extends BaseService {
     return this.partial(user, UserEntity);
   }
 
-  async getMembers(take: number, cursor: number = undefined) {
+  async getPeoples(
+    take: number,
+    cursor: number = undefined,
+    role: string = undefined,
+  ) {
     const queryOptions: Prisma.UserFindManyArgs = {
-      where: {
-        roles: {
-          some: {
-            key: RoleKeysEnum.Member,
-          },
-        },
+      select: {
+        id: true,
+        full_name: true,
+        username: true,
+        email: true,
+        phone_number: true,
+        status: true,
+        created_at: true,
+        updated_at: true,
+        ...PeoplesListIncludeQuery,
       },
       take: Number(take),
       orderBy: {
-        id: 'asc',
+        id: 'desc',
       },
-      include: MembersListIncludeQuery,
     };
     if (cursor) {
       queryOptions.cursor = {
         id: cursor,
       };
     }
-    return await this.prisma.user.findMany(queryOptions);
-  }
-
-  async getMentors(take: number, cursor: number = undefined) {
-    const queryOptions: Prisma.UserFindManyArgs = {
-      where: {
+    if (role) {
+      queryOptions.where = {
         roles: {
           some: {
-            key: RoleKeysEnum.Mentor,
+            key: role,
           },
         },
-      },
-      take: Number(take),
-      orderBy: {
-        id: 'asc',
-      },
-      include: MentorsListIncludeQuery,
-    };
-    if (cursor) {
-      queryOptions.cursor = {
-        id: cursor,
       };
     }
     return await this.prisma.user.findMany(queryOptions);

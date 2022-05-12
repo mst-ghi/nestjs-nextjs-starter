@@ -22,15 +22,17 @@ interface PageContentProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const PageContentComponent = memo<PageContentProps>(
-  ({ title, isLoading = false, withOverflowHandler = true, children, meta }) => {
+  ({ title, isLoading = false, withOverflowHandler = true, children, meta, className }) => {
     const router = useRouter();
     const { isGlobalLoading } = useApp();
 
     return (
       <div
-        className={['px-6 pb-4 pt-2 flex-1 relative', withOverflowHandler && 'overflow-auto'].join(
-          ' '
-        )}
+        className={[
+          'px-6 pb-4 pt-2 flex-1 relative',
+          withOverflowHandler && 'overflow-auto',
+          className,
+        ].join(' ')}
       >
         <Head>
           <title>{`${title} - ${envs.siteTitle}`}</title>

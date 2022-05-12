@@ -6,7 +6,7 @@ import { catchLogger } from './utils';
 
 const UserData: Prisma.UserCreateInput[] = [
   {
-    full_name: 'Mostafa Gholami',
+    full_name: 'مصطفی غلامی',
     username: 'mostafa',
     email: 'mostafagholamidev@gmail.com',
     password: sha3_256(sha3_256('12345678')),
